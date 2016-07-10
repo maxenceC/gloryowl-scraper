@@ -29,21 +29,20 @@ var scrapeTargetPage = function (page) {
                 const comicReference = $(this).find('.entry-title a').text();
                 const comicImg = $(this).find('.separator a').attr('href');
 
-                const comic = {
+                return {
                     _id: comicReference,
                     img: comicImg
                 };
 
-                console.log(comic);
-                return this;
+
             }).get();
 
 
             return {comics: comicsLinks, nextPage: nextPage}
         })
         .then(function (comics) {
-            //console.log(comics.comics);
-            //scrapeTargetPage(comics.nextPage)
+            console.log(comics.comics);
+            scrapeTargetPage(comics.nextPage)
         });
 };
 
