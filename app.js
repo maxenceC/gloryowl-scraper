@@ -48,9 +48,10 @@ var scraperjs = require('scraperjs');
 var scrapRouter = new scraperjs.Router();
 
 var scrapeWebsite = new CronJob({
-    cronTime: '00 00 00 * * 1-7',
+    cronTime: '00 10 00 * * 1-7',
     onTick: function () {
         Allcomics = [];
+        console.log('start cron job');
         scrapeTargetPage('http://gloryowlcomix.blogspot.com');
     },
     start: false,
