@@ -20,7 +20,7 @@
 9 verbose stack     at maybeClose (internal/child_process.js:827:16)
 9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 10 verbose pkgid gloryowl-parser@0.0.0
-11 verbose cwd /Users/maxencecornet/gloryowl-parser
+11 verbose cwd /Users/maxencecornet/gloryowl-scraper
 12 error Darwin 14.3.0
 13 error argv "/usr/local/Cellar/node/6.2.0/bin/node" "/usr/local/bin/npm" "start"
 14 error node v4.4.2
