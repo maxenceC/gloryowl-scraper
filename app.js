@@ -48,13 +48,13 @@ var scraperjs = require('scraperjs');
 var scrapRouter = new scraperjs.Router();
 
 var scrapeWebsite = new CronJob({
-    cronTime: '00 50 23 * * 1-7',
+    cronTime: '00 59 23 * * 1-7',
     onTick: function () {
         Allcomics = [];
         scrapeTargetPage('http://gloryowlcomix.blogspot.com');
     },
     start: false,
-    timeZone: 'Europe/Berlin'
+    timeZone: 'Europe/Paris'
 });
 
 var scrapeTargetPage = function (page) {
