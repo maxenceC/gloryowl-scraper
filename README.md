@@ -1,5 +1,5 @@
 # gloryowl-scraper
-a scraper for the french comic gloryowlcomix (http://gloryowlcomix.blogspot.com/)
+a nodejs scraper for the french comic gloryowlcomix (http://gloryowlcomix.blogspot.com/)
 
 ### Run the app
 
