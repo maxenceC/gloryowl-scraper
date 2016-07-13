@@ -10,7 +10,14 @@ var app = express();
 
 /* GET home page. */
 app.get('/comics', function (req, res, next) {
-    res.status(200).send({comics: Allcomics});
+    return res.status(200).send({comics: Allcomics});
+});
+
+app.get('/fetchComics', function (req, res, next) {
+    console.info('start scrapping');
+    Allcomics = [];
+    scrapeTargetPage('http://gloryowlcomix.blogspot.com');
+    return res.status(200).send({});
 });
 
 // uncomment after placing your favicon in /public
@@ -43,20 +50,13 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
 });
 
-var CronJob = require('cron').CronJob;
+
+/*
+    Scrapper
+ */
+
 var scraperjs = require('scraperjs');
 var scrapRouter = new scraperjs.Router();
-
-var scrapeWebsite = new CronJob({
-    cronTime: '00 10 00 * * 1-7',
-    onTick: function () {
-        Allcomics = [];
-        console.log('start cron job');
-        scrapeTargetPage('http://gloryowlcomix.blogspot.com');
-    },
-    start: false,
-    timeZone: 'Europe/Paris'
-});
 
 var scrapeTargetPage = function (page) {
     scraperjs.StaticScraper.create(page)
@@ -91,11 +91,12 @@ var scrapeTargetPage = function (page) {
             Allcomics = Allcomics.concat(comics.comics);
             if (comics.shouldContinue) {
                 scrapeTargetPage(comics.nextPage)
+            } else {
+                console.log('done scraping');
             }
         });
 };
 
-scrapeWebsite.start();
 
 module.exports = app;
 
