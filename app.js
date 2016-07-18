@@ -8,6 +8,8 @@ var Allcomics = [];
 var lastScraping = null;
 
 var app = express();
+var cors = require('cors');
+app.use(cors());
 
 /* GET home page. */
 app.get('/comics', function (req, res, next) {
