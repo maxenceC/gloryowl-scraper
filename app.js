@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Allcomics = [];
+var lastScraping = null;
 
 var app = express();
 
@@ -13,11 +14,25 @@ app.get('/comics', function (req, res, next) {
     return res.status(200).send({comics: Allcomics});
 });
 
-app.get('/fetchComics', function (req, res, next) {
-    console.info('start scrapping');
-    Allcomics = [];
-    scrapeTargetPage('http://gloryowlcomix.blogspot.com');
-    return res.status(200).send({});
+app.get('/fetch-comics', function (req, res, next) {
+
+    if (lastScraping !== null) {
+        var date2 = new Date();
+        var timeDiff = Math.abs(date2.getTime() - lastScraping.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        console.log(diffDays);
+    }
+
+    if (lastScraping === null || diffDays > 1) {
+        console.info('start scrapping');
+        lastScraping = new Date();
+        Allcomics = [];
+        scrapeTargetPage('http://gloryowlcomix.blogspot.com');
+        return res.status(200).send({"message": "lauching_scrapper"});
+    }else {
+        return res.status(200).send({"message": "already_scrapped_today"});
+    }
+
 });
 
 // uncomment after placing your favicon in /public
@@ -52,7 +67,7 @@ app.use(function (err, req, res, next) {
 
 
 /*
-    Scrapper
+ Scrapper
  */
 
 var scraperjs = require('scraperjs');
