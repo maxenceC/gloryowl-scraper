@@ -7,13 +7,19 @@ a nodejs scraper for the french comic gloryowlcomix (http://gloryowlcomix.blogsp
 
 `cd gloryowl-scraper`
 
+Locally : 
+
+`npm start`
+
+On you server :
+
 `forever start ./bin/www`
 
 ### Scrape the website
 
 Once the app is running, go to :
 
-`http://localhost:3000/fetchComics` 
+`http://localhost:3000/fetch-comics` 
 
 (or whatever localhost/ip/port if you are not running a local server or changed the local port)
 
